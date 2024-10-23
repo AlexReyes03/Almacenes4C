@@ -12,7 +12,7 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private int id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -49,7 +49,7 @@ public class Article {
     }
 
     //3.- Todos los atributos de la clase con las de relacion e ID
-    public Article(Long id, String name, String description, long onStock, String registeredOn, Category category, Storage storage) {
+    public Article(int id, String name, String description, long onStock, String registeredOn, Category category, Storage storage) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -74,7 +74,7 @@ public class Article {
     //5.- Todos los actibutos de la clase con id
 
 
-    public Article(Long id, String name, String description, long onStock, String registeredOn) {
+    public Article(int id, String name, String description, long onStock, String registeredOn) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -84,11 +84,11 @@ public class Article {
 
     //---------------------- GETTERS Y SETTERS --------------------//
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
