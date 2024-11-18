@@ -11,8 +11,10 @@ public class StorageDTO {
 
     // CONSTRUCTORES
 
+    // Constructor vacío
     public StorageDTO() {}
 
+    // Constructor completo
     public StorageDTO(long id, String name, long userId, long categoryId, List<Long> articleIds) {
         this.id = id;
         this.name = name;

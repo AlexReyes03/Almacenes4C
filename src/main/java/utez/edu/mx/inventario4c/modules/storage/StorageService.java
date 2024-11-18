@@ -16,6 +16,7 @@ import java.util.List;
 @Service
 public class StorageService {
 
+    // INYECCION DE DEPENDENCIAS
     @Autowired
     private StorageRepository storageRepository;
 
@@ -26,6 +27,7 @@ public class StorageService {
     private CustomResponseEntity customResponseEntity;
 
     // MÉTODOS DEL SERVICIO
+    // Transformar almacén a DTO
     public StorageDTO transformStorageToDTO(Storage s) {
         // Manejar el caso en el que la lista de artículos sea null y obtener los IDs como Long
         List<Long> articleIds = s.getArticles() != null
@@ -59,7 +61,7 @@ public class StorageService {
         return customResponseEntity.getOkResponse(message, "OK", 200, list);
     }
 
-    // Traer todos los almacenes por ID
+    // Traer almacén por ID
     @Transactional(readOnly = true)
     public ResponseEntity<?> findById(long idStorage) {
         StorageDTO dto = null;
@@ -75,13 +77,11 @@ public class StorageService {
         }
     }
 
+    // Guardar almacén
     @Transactional(rollbackFor = {SQLException.class, Exception.class})
     public ResponseEntity<?> save(Storage storage) {
         try {
-            // Guardar el almacenamiento
             storageRepository.save(storage);
-
-            // Revisar los artículos asociados
             if (storage.getArticles() != null) {
                 for (Article article : storage.getArticles()) {
                     if (article.getOnStock() > 0) {
@@ -90,7 +90,6 @@ public class StorageService {
                     }
                 }
             }
-
             return customResponseEntity.getOkResponse(
                     "Registro exitoso",
                     "CREATED",
@@ -104,7 +103,7 @@ public class StorageService {
         }
     }
 
-
+    // Actualizar almacén
     @Transactional(rollbackFor = {SQLException.class, Exception.class})
     public ResponseEntity<?> update(Storage storage) {
         Storage found = storageRepository.findById(storage.getId());
@@ -127,6 +126,7 @@ public class StorageService {
         }
     }
 
+    // Eliminar almacén por ID
     @Transactional(rollbackFor = {SQLException.class, Exception.class})
     public ResponseEntity<?> deleteById(Storage storage) {
         if (storageRepository.findById(storage.getId()) == null) {
@@ -147,5 +147,4 @@ public class StorageService {
             }
         }
     }
-
 }

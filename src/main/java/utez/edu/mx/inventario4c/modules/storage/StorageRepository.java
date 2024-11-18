@@ -23,5 +23,4 @@ public interface StorageRepository extends JpaRepository<Storage, Long> {
     @Modifying
     @Query(value = "DELETE FROM storage WHERE id = ?", nativeQuery = true)
     void deleteById(@Param("idStorage") long idStorage);
-
 }

@@ -11,6 +11,7 @@ import java.util.Map;
 public class CustomResponseEntity {
     private Map<String, Object> body;
 
+    // Response para status de OK
     public ResponseEntity<?> getOkResponse(String message, String status, int code, Object data) {
         body = new HashMap<>();
         body.put("message", message);
@@ -23,6 +24,7 @@ public class CustomResponseEntity {
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
+    // Response para status de BAD REQUEST
     public ResponseEntity<?> get400Response() {
         body = new HashMap<>();
         body.put("message", "BAD_REQUEST");
@@ -32,6 +34,7 @@ public class CustomResponseEntity {
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
+    // Response para status de NOT FOUND
     public ResponseEntity<?> get404Response() {
         body = new HashMap<>();
         body.put("message","Recurso no encontrado");
@@ -40,5 +43,4 @@ public class CustomResponseEntity {
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
-
 }

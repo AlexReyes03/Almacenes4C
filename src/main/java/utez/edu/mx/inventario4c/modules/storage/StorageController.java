@@ -20,24 +20,28 @@ public class StorageController {
         return storageService.findAll();
     }
 
+    // Traer almacén por id
     @GetMapping("/{idStorage}")
     @Secured("ROLE_ADMIN")
     public ResponseEntity<?> findById(@PathVariable("idStorage") int idStorage) {
         return storageService.findById(idStorage);
     }
 
+    // Guardar un almacén
     @PostMapping("")
     @Secured("ROLE_ADMIN")
     public ResponseEntity<?> save(@RequestBody Storage storage) {
         return storageService.save(storage);
     }
 
+    // Actualizar un almacén
     @PutMapping("")
     @Secured("ROLE_ADMIN")
     public ResponseEntity<?> update(@RequestBody Storage storage) {
         return storageService.update(storage);
     }
 
+    // Eliminar un almacén
     @DeleteMapping("")
     @Secured("ROLE_ADMIN")
     public ResponseEntity<?> deleteById(@RequestBody Storage storage) {
