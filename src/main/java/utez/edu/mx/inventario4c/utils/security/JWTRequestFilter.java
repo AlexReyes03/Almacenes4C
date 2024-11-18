@@ -16,12 +16,16 @@ import java.io.IOException;
 
 @Component
 public class JWTRequestFilter extends OncePerRequestFilter {
+
+    // INYECCIÓN DE DEPENDENCIAS
+
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Autowired
     private JWTUtil jwtUtil;
 
+    // Filtra las solicitudes para verificar el token JWT en el encabezado Authorization
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -30,15 +34,17 @@ public class JWTRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwt = null;
 
-        try {
+        try { // Verifica si el encabezado tiene un token JWT válido
             if (AUTHORIZATION_HEADER != null && AUTHORIZATION_HEADER.startsWith("Bearer ")) {
                 jwt = AUTHORIZATION_HEADER.substring(7);
                 username = jwtUtil.extractUsername(jwt);
             }
 
+            // Si el token es válido y no está autenticado, autentica al usuario
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
+                // Si el token es válido, se establece la autenticación
                 if (jwtUtil.validateToken(jwt, userDetails)) {
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                             new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -51,12 +57,13 @@ public class JWTRequestFilter extends OncePerRequestFilter {
                     return;
                 }
             }
-        } catch (Exception e) {
+        } catch (Exception e) { // Si ocurre un error, responde con un estado de no autorizado
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Authentication failed: " + e.getMessage());
             return;
         }
 
+        // Continúa con el filtro
         filterChain.doFilter(request, response);
     }
 

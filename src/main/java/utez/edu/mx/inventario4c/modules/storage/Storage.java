@@ -10,27 +10,28 @@ import java.util.List;
 @Entity
 @Table(name = "storage")
 public class Storage {
-    @Id
+    @Id // Identificador del almacén
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private long id;
 
+    // Nombre del almacén
     @Column(name = "name", nullable = false)
     private String name;
 
     // ATRIBUTOS DE RELACIÓN CON OTRAS COLUMNAS
-    // Relación con User
+    // Relación con User Uno a Uno
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
     private User user;
 
 
-    // Relación con Category
+    // Relación con Category Muchos a Uno
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
-    // Relación con Article
+    // Relación con Article Muchos a Muchos
     @ManyToMany
     @JoinTable(
             name = "storage_has_articles",
@@ -39,19 +40,22 @@ public class Storage {
     private List<Article> articles;
 
     // CONSTRUCTORES
-
+    // Vacío
     public Storage() {
     }
 
+    // Con nombre
     public Storage(String name) {
         this.name = name;
     }
 
+    // Con identificador y nombre
     public Storage(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
+    // Con nombre y atributos de relación
     public Storage(String name, User user, Category category, List<Article> articles) {
         this.name = name;
         this.user = user;
@@ -59,6 +63,7 @@ public class Storage {
         this.articles = articles;
     }
 
+    // Con identificador, nombre y atributos de relación
     public Storage(long id, String name, User user, Category category, List<Article> articles) {
         this.id = id;
         this.name = name;

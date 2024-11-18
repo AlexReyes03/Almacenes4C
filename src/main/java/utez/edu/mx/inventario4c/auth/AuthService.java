@@ -19,6 +19,8 @@ public class AuthService {
 
     private static final Logger logger = LogManager.getLogger(AuthService.class);
 
+    // INYECCIÓN DE DEPENDENCIAS
+
     @Autowired
     private UserRepository userRepository;
     
@@ -27,7 +29,8 @@ public class AuthService {
     
     @Autowired
     private JWTUtil jwtUtil;
-    
+
+    // Autenticar a un usuario con las credenciales proporcionadas
     @Transactional(readOnly = true)
     public ResponseEntity<?> login(AuthLoginDTO authLoginDTO) {
         User found = userRepository.findByPasswordAndEmailOrUsername(
@@ -39,6 +42,7 @@ public class AuthService {
         } else {
             try {
                 UserDetails userDetails = new UserDetailsImpl(found);
+
                 return customResponseEntity.getOkResponse(
                         "Inicio de sesión exitoso",
                         "OK",
