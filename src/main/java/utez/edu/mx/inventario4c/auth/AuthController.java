@@ -7,7 +7,7 @@ import utez.edu.mx.inventario4c.auth.DTO.AuthLoginDTO;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = {"*"})
+@CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500"})
 public class AuthController {
     @Autowired
     private AuthService authService;

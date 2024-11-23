@@ -39,8 +39,8 @@ public class User {
     private Rol rol;
 
     // Relación con Storage (almacenes)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
-    @OneToOne(mappedBy = "user")
     private Storage storage;
 
     // Constructores
