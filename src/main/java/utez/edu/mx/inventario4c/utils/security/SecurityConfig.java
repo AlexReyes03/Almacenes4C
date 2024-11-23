@@ -15,52 +15,57 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-    // INYECCIÓN DE DEPENDENCIAS
-
     @Autowired
     private JWTRequestFilter jwtRequestFilter;
 
-    // Configura los filtros de seguridad, roles de usuario y manejo de excepciones
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()) // Desactiva CSRF porque se está usando REST
+        http.csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(request -> {
+                    var corsConfig = new org.springframework.web.cors.CorsConfiguration();
+                    // Especificar los orígenes permitidos explícitamente
+                    corsConfig.setAllowedOrigins(List.of("http://127.0.0.1:5500", "http://localhost:5500")); // No usar "*" aquí
+                    corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                    corsConfig.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+                    corsConfig.setAllowCredentials(true);
+                    return corsConfig;
+                }))
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/auth/**").permitAll()                                       // Permite acceso libre a las rutas de autenticación
-                        .requestMatchers("/api/**").hasAnyRole("ADMIN", "EMPLOYEE", "CUSTOMER") // Solo permite acceso a ciertos roles
-                        .anyRequest().authenticated()                                                   // Todas las demás rutas requieren autenticación
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/api/**").hasAnyRole("ADMIN", "EMPLOYEE", "CUSTOMER")
+                        .anyRequest().authenticated()
                 )
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .authenticationEntryPoint((request, response, authException) -> {
-                            // Devuelve error 401 si la autenticación falla
                             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                             response.getWriter().write("Unauthorized: " + authException.getMessage());
                         })
                         .accessDeniedHandler((request, response, accessDeniedException) -> {
-                            // Devuelve error 401 si el usuario no tiene permisos suficientes
                             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                             response.getWriter().write("Access Denied: Insufficient permissions.");
                         })
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        // Añade el filtro JWT antes del filtro de autenticación
+        http.addFilterBefore(new NoCacheFilter(), JWTRequestFilter.class);
+
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    // Define el codificador de contraseñas usando BCrypt
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Define el manejador de autenticación para poder autenticar al usuario
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

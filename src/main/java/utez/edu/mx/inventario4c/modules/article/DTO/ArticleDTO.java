@@ -1,21 +1,25 @@
 package utez.edu.mx.inventario4c.modules.article.DTO;
 
+import utez.edu.mx.inventario4c.modules.category.Category;
+import utez.edu.mx.inventario4c.modules.storage.Storage;
+
 public class ArticleDTO {
     private long id;
     private String name;
     private String description;
-    private long categoryId;
-    private long storageId;
+    private Category category;
+    private Storage storage;
 
     // Constructor vacío
     public ArticleDTO() {}
 
     // Constructor completo
-    public ArticleDTO(String name, String description, long categoryId, long storageId) {
+    public ArticleDTO(long id, String name, String description, Category category, Storage storage) {
+        this.id = id;
         this.name = name;
         this.description = description;
-        this.categoryId = categoryId;
-        this.storageId = storageId;
+        this.category = category;
+        this.storage = storage;
     }
 
     // Getters y Setters
@@ -43,19 +47,19 @@ public class ArticleDTO {
         this.description = description;
     }
 
-    public long getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public long getStorageId() {
-        return storageId;
+    public Storage getStorage() {
+        return storage;
     }
 
-    public void setStorageId(long storageId) {
-        this.storageId = storageId;
+    public void setStorage(Storage storage) {
+        this.storage = storage;
     }
 }

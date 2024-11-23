@@ -39,8 +39,8 @@ public class StorageService {
         return new StorageDTO(
                 s.getId(),
                 s.getName(),
-                s.getUser() != null ? s.getUser().getId() : 0,  // Manejar null
-                s.getCategory() != null ? s.getCategory().getId() : 0,  // Manejar null
+                s.getUser() != null ? s.getUser() : null,  // Manejar null
+                s.getCategory() != null ? s.getCategory() : null,  // Manejar null
                 articleIds
         );
     }

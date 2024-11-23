@@ -26,10 +26,11 @@ public class ArticleService {
 
     public ArticleDTO transformArticleToDTO(Article a) {
         return new ArticleDTO(
+                a.getId(),
                 a.getName(),
                 a.getDescription(),
-                a.getCategory().getId(),
-                a.getStorages().isEmpty() ? null : a.getStorages().get(0).getId()
+                a.getCategory() != null ? a.getCategory() : null,
+                a.getStorages() !=null ? a.getStorages().get(0) : null
         );
     }
 

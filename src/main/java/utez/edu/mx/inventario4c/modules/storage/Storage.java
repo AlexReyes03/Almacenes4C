@@ -16,13 +16,13 @@ public class Storage {
     private long id;
 
     // Nombre del almacén
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     // ATRIBUTOS DE RELACIÓN CON OTRAS COLUMNAS
     // Relación con User Uno a Uno
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true, nullable = false)
     private User user;
 
 
