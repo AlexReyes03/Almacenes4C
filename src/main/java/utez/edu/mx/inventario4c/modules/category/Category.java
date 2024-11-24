@@ -20,6 +20,9 @@ public class Category {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "idColor", nullable = true)
+    private int idColor;
+
     @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<Storage> storages;
