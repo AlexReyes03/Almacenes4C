@@ -1,5 +1,6 @@
 package utez.edu.mx.inventario4c.modules.storage.DTO;
 
+import utez.edu.mx.inventario4c.modules.article.Article;
 import utez.edu.mx.inventario4c.modules.category.Category;
 import utez.edu.mx.inventario4c.modules.user.User;
 
@@ -10,7 +11,7 @@ public class StorageDTO {
     private String name;
     private User user;
     private Category category;
-    private List<Long> articleIds;
+    private List<Article> articles;
 
     // CONSTRUCTORES
 
@@ -18,13 +19,15 @@ public class StorageDTO {
     public StorageDTO() {}
 
     // Constructor completo
-    public StorageDTO(long id, String name, User user, Category category, List<Long> articleIds) {
+
+    public StorageDTO(long id, String name, User user, Category category, List<Article> articles) {
         this.id = id;
         this.name = name;
         this.user = user;
         this.category = category;
-        this.articleIds = articleIds;
+        this.articles = articles;
     }
+
 
     // GETTERS AND SETTERS
 
@@ -60,11 +63,11 @@ public class StorageDTO {
         this.category = category;
     }
 
-    public List<Long> getArticleIds() {
-        return articleIds;
+    public List<Article> getArticles() {
+        return articles;
     }
 
-    public void setArticleIds(List<Long> articleIds) {
-        this.articleIds = articleIds;
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 }

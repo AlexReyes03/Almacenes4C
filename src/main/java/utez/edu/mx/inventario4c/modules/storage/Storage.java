@@ -5,6 +5,7 @@ import utez.edu.mx.inventario4c.modules.article.Article;
 import utez.edu.mx.inventario4c.modules.category.Category;
 import utez.edu.mx.inventario4c.modules.user.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -113,4 +114,23 @@ public class Storage {
     public void setArticles(List<Article> articles) {
         this.articles = articles;
     }
+
+    public void addArticle(Article article) {
+        if (this.articles == null) {
+            this.articles = new ArrayList<>();
+        }
+        if (!this.articles.contains(article)) {
+            this.articles.add(article);
+            article.getStorages().add(this); // Sincroniza bidireccionalmente
+        }
+    }
+
+    public void removeArticle(Article article) {
+        if (this.articles != null && this.articles.contains(article)) {
+            this.articles.remove(article);
+            article.getStorages().remove(this); // Sincroniza bidireccionalmente
+        }
+    }
+
+
 }

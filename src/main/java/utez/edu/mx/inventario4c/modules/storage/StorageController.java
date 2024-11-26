@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/storage")
 @CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500"})
@@ -33,6 +35,20 @@ public class StorageController {
     @Secured("ROLE_ADMIN")
     public ResponseEntity<?> save(@RequestBody Storage storage) {
         return storageService.save(storage);
+    }
+
+    // Añadir artículos a un almacén
+    @PostMapping("/{idStorage}/add-articles")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<?> addArticlesToStorage(@PathVariable long idStorage, @RequestBody List<Long> articleIds) {
+        return storageService.addArticlesToStorage(idStorage, articleIds);
+    }
+
+    // Eliminar artículos de un almacén
+    @PostMapping("/{idStorage}/remove-articles")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<?> removeArticlesFromStorage(@PathVariable long idStorage, @RequestBody List<Long> articleIds) {
+        return storageService.removeArticlesFromStorage(idStorage, articleIds);
     }
 
     // Actualizar un almacén

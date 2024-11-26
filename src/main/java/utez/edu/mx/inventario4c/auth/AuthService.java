@@ -30,7 +30,7 @@ public class AuthService {
     @Autowired
     private JWTUtil jwtUtil;
 
-    // Autenticar a un usuario con las credenciales proporcionadas
+    // Autenticar a un usuario con sus credenciales
     @Transactional(readOnly = true)
     public ResponseEntity<?> login(AuthLoginDTO authLoginDTO) {
         User found = userRepository.findByPasswordAndEmailOrUsername(

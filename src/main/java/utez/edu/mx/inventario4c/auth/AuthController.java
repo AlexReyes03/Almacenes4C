@@ -12,7 +12,6 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    // Login usando el DTO
     @PostMapping("")
     public ResponseEntity<?> login(@RequestBody AuthLoginDTO authLoginDTO) {
         return authService.login(authLoginDTO);

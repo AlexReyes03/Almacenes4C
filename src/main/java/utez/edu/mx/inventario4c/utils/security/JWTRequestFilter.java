@@ -25,7 +25,6 @@ public class JWTRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JWTUtil jwtUtil;
 
-    // Filtra las solicitudes para verificar el token JWT en el encabezado Authorization
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -34,7 +33,7 @@ public class JWTRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwt = null;
 
-        try { // Verifica si el encabezado tiene un token JWT válido
+        try {
             if (AUTHORIZATION_HEADER != null && AUTHORIZATION_HEADER.startsWith("Bearer ")) {
                 jwt = AUTHORIZATION_HEADER.substring(7);
                 username = jwtUtil.extractUsername(jwt);
@@ -57,13 +56,12 @@ public class JWTRequestFilter extends OncePerRequestFilter {
                     return;
                 }
             }
-        } catch (Exception e) { // Si ocurre un error, responde con un estado de no autorizado
+        } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Authentication failed: " + e.getMessage());
             return;
         }
 
-        // Continúa con el filtro
         filterChain.doFilter(request, response);
     }
 

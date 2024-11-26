@@ -27,14 +27,14 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()) // Desactiva CSRF para trabajar con APIs REST
+        http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(request -> {
                     var corsConfig = new org.springframework.web.cors.CorsConfiguration();
-                    // Especificar los orígenes permitidos explícitamente
+
                     corsConfig.setAllowedOrigins(List.of("http://127.0.0.1:5500", "http://localhost:5500")); // No usar "*" aquí
                     corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     corsConfig.setAllowedHeaders(List.of("Authorization", "Content-Type"));
-                    corsConfig.setAllowCredentials(true);  // Esto sigue habilitado para permitir credenciales
+                    corsConfig.setAllowCredentials(true);
                     return corsConfig;
                 }))
                 .authorizeHttpRequests(authz -> authz

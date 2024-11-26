@@ -11,7 +11,6 @@ import java.util.List;
 @Table(name="category")
 public class Category {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", nullable = false)
@@ -19,6 +18,9 @@ public class Category {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "color", nullable = false)
+    private long color;
 
     @JsonIgnore
     @OneToMany(mappedBy = "category")
@@ -31,24 +33,28 @@ public class Category {
     public Category() {
     }
 
-    public Category(String name) {
+    public Category(String name, long color) {
         this.name = name;
+        this.color = color;
     }
 
-    public Category(int id, String name) {
+    public Category(int id, String name, long color) {
         this.id = id;
         this.name = name;
+        this.color = color;
     }
 
-    public Category(String name, List<Storage> storages, List<Article> articles) {
+    public Category(String name, long color, List<Storage> storages, List<Article> articles) {
         this.name = name;
+        this.color = color;
         this.storages = storages;
         this.articles = articles;
     }
 
-    public Category(int id, String name, List<Storage> storages, List<Article> articles) {
+    public Category(int id, String name, long color, List<Storage> storages, List<Article> articles) {
         this.id = id;
         this.name = name;
+        this.color = color;
         this.storages = storages;
         this.articles = articles;
     }
@@ -65,8 +71,16 @@ public class Category {
         return name;
     }
 
-    public void setName(String nombre) {
-        this.name = nombre;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getColor() {
+        return color;
+    }
+
+    public void setColor(long color) {
+        this.color = color;
     }
 
     public List<Storage> getStorages() {

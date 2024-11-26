@@ -101,6 +101,8 @@ public class ArticleService {
             return customResponseEntity.get404Response();
         } else {
             try {
+                article.setRegisteredOn(found.getRegisteredOn());
+
                 articleRepository.save(article);
                 return customResponseEntity.getOkResponse(
                         "Actualización exitosa",
@@ -141,23 +143,29 @@ public class ArticleService {
 
     //Decrementar el stock por id
     @Transactional(rollbackFor = {SQLException.class, Exception.class})
-    public ResponseEntity<?> decrementStockById(ArticleQuantityDTO data){
-        if(articleRepository.findById(data.getId())==null){
+    public ResponseEntity<?> decrementStockById(ArticleQuantityDTO data) {
+        Article article = articleRepository.findById(data.getId());
+        if (article == null) {
             return customResponseEntity.get404Response();
-        }else{
-            try{
-                articleRepository.decrementStockById(data.getQuantity(), data.getId());
-                return customResponseEntity.getOkResponse(
-                        "Se disminuyó el stock del artículo",
-                        "OK",
-                        200,
-                        null
-                );
-            }catch(Exception e){
-                e.printStackTrace();
-                System.out.println(e.getMessage());
-                return customResponseEntity.get400Response();
-            }
+        }
+
+        long currentStock = article.getOnStock();
+        if (data.getQuantity() > currentStock) {
+            return customResponseEntity.get400Response();
+        }
+
+        try{
+            articleRepository.decrementStockById(data.getQuantity(), data.getId());
+            return customResponseEntity.getOkResponse(
+                    "Se disminuyó el stock del artículo",
+                    "OK",
+                    200,
+                    null
+            );
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return customResponseEntity.get400Response();
         }
     }
 }

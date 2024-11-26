@@ -19,7 +19,6 @@ public class UserDetailsService implements org.springframework.security.core.use
     @Autowired
     private UserRepository userRepository;
 
-    // Carga los detalles de un usuario por su nombre de usuario
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Buscar el usuario por nombre de usuario
@@ -28,10 +27,8 @@ public class UserDetailsService implements org.springframework.security.core.use
             throw new UsernameNotFoundException("Usuario no encontrado: " + username);
         }
 
-        // Obtiene el rol del usuario y lo asigna como autoridad
         GrantedAuthority authority = new SimpleGrantedAuthority(user.getRol().getName());
 
-        // Devuelve un objeto UserDetails con los detalles del usuario y su rol
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 Collections.singleton(authority));
     }
