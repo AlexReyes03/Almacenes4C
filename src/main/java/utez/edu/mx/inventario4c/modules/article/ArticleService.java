@@ -93,6 +93,31 @@ public class ArticleService {
         }
     }
 
+    // Guardar una lista de artículos
+    @Transactional(rollbackFor = {SQLException.class, Exception.class})
+    public ResponseEntity<?> saveAll(List<Article> articles) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", new Locale("es-MX"));
+        Date currentDate = new Date();
+
+        try {
+            for (Article article : articles) {
+                article.setRegisteredOn(sdf.format(currentDate));
+                articleRepository.save(article);
+            }
+
+            return customResponseEntity.getOkResponse(
+                    "Todos los artículos fueron registrados exitosamente",
+                    "CREATED",
+                    201,
+                    null
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return customResponseEntity.get400Response();
+        }
+    }
+
     // Actualizar artículo
     @Transactional(rollbackFor = {SQLException.class, Exception.class})
     public ResponseEntity<?> update(Article article) {

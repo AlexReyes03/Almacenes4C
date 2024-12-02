@@ -6,6 +6,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import utez.edu.mx.inventario4c.modules.article.DTO.ArticleQuantityDTO;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/articles")
 @CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500"})
@@ -33,6 +35,13 @@ public class ArticleController {
     @Secured("ROLE_ADMIN")
     public ResponseEntity<?> save(@RequestBody Article article) {
         return articleService.save(article);
+    }
+
+    // Guardar una lista de artículos
+    @PostMapping("/batch")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<?> saveAll(@RequestBody List<Article> articles) {
+        return articleService.saveAll(articles);
     }
 
     // Actualizar un artículo existente
