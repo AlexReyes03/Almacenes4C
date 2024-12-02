@@ -2,12 +2,15 @@ package utez.edu.mx.inventario4c.modules.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/user")
 @CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500"})
+@Validated
 public class UserController {
 
     @Autowired
@@ -37,13 +40,13 @@ public class UserController {
 
     @PostMapping("")
     @Secured("ROLE_ADMIN")
-    public ResponseEntity<?> save(@RequestBody User user) {
+    public ResponseEntity<?> save(@Valid @RequestBody User user) {
         return userService.save(user);
     }
 
     @PutMapping("")
     @Secured("ROLE_ADMIN")
-    public ResponseEntity<?> update(@RequestBody User user) {
+    public ResponseEntity<?> update(@Valid @RequestBody User user) {
         return userService.update(user);
     }
 

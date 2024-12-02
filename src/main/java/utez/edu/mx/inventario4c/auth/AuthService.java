@@ -14,19 +14,21 @@ import utez.edu.mx.inventario4c.modules.user.UserRepository;
 import utez.edu.mx.inventario4c.utils.CustomResponseEntity;
 import utez.edu.mx.inventario4c.utils.security.JWTUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class AuthService {
 
     private static final Logger logger = LogManager.getLogger(AuthService.class);
 
     // INYECCIÓN DE DEPENDENCIAS
-
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
     private CustomResponseEntity customResponseEntity;
-    
+
     @Autowired
     private JWTUtil jwtUtil;
 
@@ -38,21 +40,38 @@ public class AuthService {
                 authLoginDTO.getUser()
         );
         if (found == null) {
-            return customResponseEntity.get404Response();
+            return customResponseEntity.get404Response();  // Retorna un 404 si no se encuentra el usuario
         } else {
             try {
+                // Crear detalles del usuario
                 UserDetails userDetails = new UserDetailsImpl(found);
 
+                // Generar el token JWT
+                String jwt = jwtUtil.generateToken(userDetails);
+
+                // Crear la respuesta con el token y los datos del usuario
+                Map<String, Object> response = new HashMap<>();
+                response.put("token", jwt);
+                response.put("user", Map.of(
+                        "id", found.getId(),
+                        "username", found.getUsername(),
+                        "name", found.getName(),
+                        "surname", found.getSurname(),
+                        "lastname", found.getLastname() != null ? found.getLastname() : "",
+                        "email", found.getEmail(),
+                        "rol", found.getRol().getName()
+                ));
+
+                // Retorna la respuesta con el token y los datos del usuario
                 return customResponseEntity.getOkResponse(
                         "Inicio de sesión exitoso",
                         "OK",
                         200,
-                        jwtUtil.generateToken(userDetails)
+                        response
                 );
             } catch (Exception e) {
-                System.out.println(e.getMessage());
-                logger.error("An error ocurred while loggin in");
-                return customResponseEntity.get400Response();
+                logger.error("Error al iniciar sesión: " + e.getMessage());
+                return customResponseEntity.get400Response();  // Si ocurre un error, retorna un 400
             }
         }
     }

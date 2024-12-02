@@ -2,6 +2,9 @@ package utez.edu.mx.inventario4c.modules.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import utez.edu.mx.inventario4c.modules.storage.Storage;
 import utez.edu.mx.inventario4c.modules.rol.Rol;
 
@@ -15,18 +18,39 @@ public class User {
     @Column(name = "id", nullable = false)
     private long id;
 
+    @NotBlank(message = "El nombre es obligatorio")
+    @Pattern(
+            regexp = "^([A-ZÁÉÍÓÚÑ]{1}[a-záéíóúñ]+\\s*)*$",
+            message = "El nombre debe comenzar con mayúscula y solo puede contener letras"
+    )
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotBlank(message = "El apellido paterno es obligatorio")
+    @Pattern(
+            regexp = "^([A-ZÁÉÍÓÚÑ]{1}[a-záéíóúñ]+\\s*)*$",
+            message = "El apellido paterno debe comenzar con mayúscula y solo puede contener letras"
+    )
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "lastname", nullable = false)
+    @Pattern(
+            regexp = "^([A-ZÁÉÍÓÚÑ]{1}[a-záéíóúñ]+\\s*)*$",
+            message = "El apellido materno debe comenzar con mayúscula y solo puede contener letras"
+    )
+    @Column(name = "lastname")
     private String lastname;
 
+    @NotBlank(message = "El correo electrónico es obligatorio")
+    @Email(message = "El correo no tiene un formato válido")
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @NotBlank(message = "El nombre de usuario es obligatorio")
+    @Pattern(
+            regexp = "^[a-zA-Z0-9]+$",
+            message = "El nombre de usuario solo puede contener letras y números"
+    )
     @Column(name = "username", nullable = false)
     private String username;
 

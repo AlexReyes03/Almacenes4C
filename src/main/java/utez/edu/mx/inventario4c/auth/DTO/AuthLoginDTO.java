@@ -1,7 +1,18 @@
 package utez.edu.mx.inventario4c.auth.DTO;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 public class AuthLoginDTO {
-    private String password, user;
+    @NotBlank(message = "El nombre de usuario es obligatorio")
+    @Pattern(
+            regexp = "^[a-zA-Z0-9]+$",
+            message = "El nombre de usuario solo puede contener letras y números"
+    )
+    private String user;
+
+    @NotBlank(message = "La contraseña es obligatoria")
+    private String password;
 
     // CONSTRUCTORES
 

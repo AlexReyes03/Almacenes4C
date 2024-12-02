@@ -33,7 +33,8 @@ public class JWTUtil {
         return claimsResolver.apply(claims);
     }
 
-    // Extrae todas las reclamaciones del token JWT
+    // Extrae todas las reclamaciones
+    // del token JWT
     private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
