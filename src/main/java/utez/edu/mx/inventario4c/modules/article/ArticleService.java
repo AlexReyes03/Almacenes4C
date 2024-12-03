@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import utez.edu.mx.inventario4c.modules.article.DTO.ArticleDTO;
 import utez.edu.mx.inventario4c.modules.article.DTO.ArticleQuantityDTO;
+import utez.edu.mx.inventario4c.modules.storage.Storage;
 import utez.edu.mx.inventario4c.utils.CustomResponseEntity;
 
 import java.sql.SQLException;
@@ -191,6 +192,28 @@ public class ArticleService {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return customResponseEntity.get400Response();
+        }
+    }
+
+    // Eliminar artículo por ID
+    @Transactional(rollbackFor = {SQLException.class, Exception.class})
+    public ResponseEntity<?> deleteById(Article article) {
+        if (articleRepository.findById(article.getId()) == null) {
+            return customResponseEntity.get404Response();
+        } else {
+            try {
+                articleRepository.deleteById(article.getId());
+                return customResponseEntity.getOkResponse(
+                        "Eliminaciòn exitosa",
+                        "OK",
+                        200,
+                        null
+                );
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println(e.getMessage());
+                return customResponseEntity.get400Response();
+            }
         }
     }
 }

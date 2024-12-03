@@ -22,4 +22,9 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Modifying
     @Query(value="UPDATE article SET on_stock=on_stock - :quantity WHERE id=:idArticle", nativeQuery=true)
     void decrementStockById(@Param("quantity")long quantity,@Param("idArticle")long idArticle);
+
+    // Eliminar artículo
+    @Modifying
+    @Query(value = "DELETE FROM article WHERE id = ?", nativeQuery = true)
+    void deleteById(@Param("idArticle") long idArticle);
 }
