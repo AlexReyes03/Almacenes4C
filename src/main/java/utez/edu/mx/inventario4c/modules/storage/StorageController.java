@@ -18,7 +18,7 @@ public class StorageController {
     // ENDPOINTS / RUTAS DE ACCESO
     // Traer a todos los almacenes
     @GetMapping("")
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     public ResponseEntity<?> findAll() {
         return storageService.findAll();
     }

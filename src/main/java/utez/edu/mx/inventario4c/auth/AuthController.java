@@ -15,6 +15,11 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    @PostMapping("/verifyCurrentPassword")
+    public ResponseEntity<?> verifyCurrentPassword(@RequestBody AuthLoginDTO authLoginDTO) {
+        return authService.verifyCurrentPassword(authLoginDTO);
+    }
+
     @PostMapping("")
     public ResponseEntity<?> login(@Valid @RequestBody AuthLoginDTO authLoginDTO) {
         return authService.login(authLoginDTO);

@@ -1,3 +1,4 @@
+
 package utez.edu.mx.inventario4c.modules.article;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +88,31 @@ public class ArticleService {
                     null
             );
         }catch(Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return customResponseEntity.get400Response();
+        }
+    }
+
+    // Guardar una lista de artículos
+    @Transactional(rollbackFor = {SQLException.class, Exception.class})
+    public ResponseEntity<?> saveAll(List<Article> articles) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", new Locale("es-MX"));
+        Date currentDate = new Date();
+
+        try {
+            for (Article article : articles) {
+                article.setRegisteredOn(sdf.format(currentDate));
+                articleRepository.save(article);
+            }
+
+            return customResponseEntity.getOkResponse(
+                    "Todos los artículos fueron registrados exitosamente",
+                    "CREATED",
+                    201,
+                    null
+            );
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
             return customResponseEntity.get400Response();

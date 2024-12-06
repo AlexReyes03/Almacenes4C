@@ -32,6 +32,16 @@ public class AuthService {
     @Autowired
     private JWTUtil jwtUtil;
 
+    // Metodo para verificar si la contraseña actual es correcta
+    @Transactional(readOnly = true)
+    public ResponseEntity<?> verifyCurrentPassword(AuthLoginDTO authLoginDTO) {
+        User found = userRepository.findByUsername(authLoginDTO.getUser());
+        if (found == null || !found.getPassword().equals(authLoginDTO.getPassword())) {
+            return customResponseEntity.get404Response();
+        }
+        return customResponseEntity.getOkResponse("Contraseña actual verificada correctamente", "OK", 200, null);
+    }
+
     // Autenticar a un usuario con sus credenciales
     @Transactional(readOnly = true)
     public ResponseEntity<?> login(AuthLoginDTO authLoginDTO) {

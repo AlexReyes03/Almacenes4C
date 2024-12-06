@@ -33,7 +33,7 @@ public class UserController {
 
     // Traer un usuario por id
     @GetMapping("/{idUser}")
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     public ResponseEntity<?> findById(@PathVariable("idUser") int idUser) {
         return userService.findById(idUser);
     }
@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @PutMapping("")
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     public ResponseEntity<?> update(@Valid @RequestBody User user) {
         return userService.update(user);
     }

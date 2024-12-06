@@ -101,7 +101,9 @@ public class UserService {
             return customResponseEntity.get404Response();
         } else {
             try {
-                user.setPassword(found.getPassword());
+                if (user.getPassword() == null || user.getPassword().isEmpty()) {
+                    user.setPassword(found.getPassword());
+                }
                 userRepository.save(user);
                 return customResponseEntity.getOkResponse("Actualización exitosa", "OK", 200, null);
             } catch (Exception e) {
