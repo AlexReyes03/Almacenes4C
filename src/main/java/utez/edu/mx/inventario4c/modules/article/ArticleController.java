@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import utez.edu.mx.inventario4c.modules.article.DTO.ArticleQuantityDTO;
+import utez.edu.mx.inventario4c.modules.storage.Storage;
 
 import java.util.List;
 
@@ -63,5 +64,12 @@ public class ArticleController {
     @Secured("ROLE_ADMIN")
     public ResponseEntity<?> decrementStock(@RequestBody ArticleQuantityDTO articleQuantityDTO) {
         return articleService.decrementStockById(articleQuantityDTO);
+    }
+
+    // Eliminar un almacén
+    @DeleteMapping("")
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<?> deleteById(@RequestBody Article article) {
+        return articleService.deleteById(article);
     }
 }
