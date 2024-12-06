@@ -27,12 +27,19 @@ public class ArticleService {
     private CustomResponseEntity customResponseEntity;
 
     public ArticleDTO transformArticleToDTO(Article a) {
+        List<Long> storageIds = new ArrayList<>();
+        if (a.getStorages() != null) {
+            for (Storage storage : a.getStorages()) {
+                storageIds.add(storage.getId());
+            }
+        }
+
         return new ArticleDTO(
                 a.getId(),
                 a.getName(),
                 a.getDescription(),
                 a.getCategory() != null ? a.getCategory() : null,
-                a.getStorages() !=null ? a.getStorages().get(0) : null
+                storageIds
         );
     }
 
@@ -59,16 +66,19 @@ public class ArticleService {
 
     //Traer artículo por id
     @Transactional(readOnly = true)
-    public ResponseEntity<?> findById(long idArticle){
-        Article found= articleRepository.findById(idArticle);
-        if(found==null){
+    public ResponseEntity<?> findById(long idArticle) {
+        Article found = articleRepository.findById(idArticle);
+
+        if (found == null) {
             return customResponseEntity.get404Response();
-        }else{
+        } else {
+            ArticleDTO articleDTO = transformArticleToDTO(found); // Transformamos a DTO
+
             return customResponseEntity.getOkResponse(
                     "Operación exitosa",
                     "OK",
                     200,
-                    found
+                    articleDTO
             );
         }
     }

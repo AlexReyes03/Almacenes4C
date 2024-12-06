@@ -3,23 +3,25 @@ package utez.edu.mx.inventario4c.modules.article.DTO;
 import utez.edu.mx.inventario4c.modules.category.Category;
 import utez.edu.mx.inventario4c.modules.storage.Storage;
 
+import java.util.List;
+
 public class ArticleDTO {
     private long id;
     private String name;
     private String description;
     private Category category;
-    private Storage storage;
+    private List<Long> storageIds;
 
     // Constructor vacío
     public ArticleDTO() {}
 
     // Constructor completo
-    public ArticleDTO(long id, String name, String description, Category category, Storage storage) {
+    public ArticleDTO(long id, String name, String description, Category category, List<Long> storageIds) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.category = category;
-        this.storage = storage;
+        this.storageIds = storageIds;
     }
 
     // Getters y Setters
@@ -55,11 +57,11 @@ public class ArticleDTO {
         this.category = category;
     }
 
-    public Storage getStorage() {
-        return storage;
+    public List<Long> getStorageIds() {
+        return storageIds;
     }
 
-    public void setStorage(Storage storage) {
-        this.storage = storage;
+    public void setStorageIds(List<Long> storageIds) {
+        this.storageIds = storageIds;
     }
 }
