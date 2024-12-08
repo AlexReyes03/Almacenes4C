@@ -38,6 +38,7 @@ public class ArticleService {
                 a.getId(),
                 a.getName(),
                 a.getDescription(),
+                a.getOnStock(),
                 a.getCategory() != null ? a.getCategory() : null,
                 storageIds
         );

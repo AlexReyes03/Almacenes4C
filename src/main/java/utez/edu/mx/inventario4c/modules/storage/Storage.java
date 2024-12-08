@@ -1,6 +1,9 @@
 package utez.edu.mx.inventario4c.modules.storage;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import utez.edu.mx.inventario4c.modules.article.Article;
 import utez.edu.mx.inventario4c.modules.category.Category;
 import utez.edu.mx.inventario4c.modules.user.User;
@@ -17,6 +20,11 @@ public class Storage {
     private long id;
 
     // Nombre del almacén
+    @NotBlank(message = "El nombre es obligatorio")
+    @Pattern(
+            regexp = "^A-\\d{3}$",
+            message = "El nombre debe empezar por A- y tener 3 números Ej. A-001"
+    )
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
@@ -28,6 +36,7 @@ public class Storage {
 
 
     // Relación con Category Muchos a Uno
+    @NotNull(message = "La categoría no puede estar vacía")
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

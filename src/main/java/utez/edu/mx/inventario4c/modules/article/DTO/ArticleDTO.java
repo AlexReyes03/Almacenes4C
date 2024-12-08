@@ -9,6 +9,7 @@ public class ArticleDTO {
     private long id;
     private String name;
     private String description;
+    private long onStock;
     private Category category;
     private List<Long> storageIds;
 
@@ -16,10 +17,13 @@ public class ArticleDTO {
     public ArticleDTO() {}
 
     // Constructor completo
-    public ArticleDTO(long id, String name, String description, Category category, List<Long> storageIds) {
+
+
+    public ArticleDTO(long id, String name, String description, long onStock, Category category, List<Long> storageIds) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.onStock = onStock;
         this.category = category;
         this.storageIds = storageIds;
     }
@@ -47,6 +51,14 @@ public class ArticleDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public long getOnStock() {
+        return onStock;
+    }
+
+    public void setOnStock(long onStock) {
+        this.onStock = onStock;
     }
 
     public Category getCategory() {

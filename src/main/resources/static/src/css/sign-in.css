@@ -1,0 +1,111 @@
+html,
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background-image 0.5s ease-in-out;
+}
+
+.eyeOpen1 {
+    display:none;
+}
+
+.bi {
+    fill: currentColor;
+}
+
+/* Estilos para el modo claro */
+html[data-bs-theme="light"] .dark-blue-bg {
+    background-color: #193140 !important;
+    color: white !important;
+    transition: background-color 0.5s ease-in-out;
+  }
+  
+html[data-bs-theme="dark"] .dark-blue-bg {
+    background-color: #2F2B8C !important;
+    color: white !important;
+    transition: background-color 0.5s ease-in-out;
+  }
+
+  /* Estilos para el modo claro */
+html[data-bs-theme="light"] .light-blue-bg {
+    background-color: #547C8C !important;
+    color: white !important;
+  }
+  
+
+html[data-bs-theme="dark"] .btn-bd-primary {
+    --bd-violet-bg: #712cf9;
+    --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+  
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bd-violet-bg);
+    --bs-btn-border-color: var(--bd-violet-bg);
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #6528e0;
+    --bs-btn-hover-border-color: #6528e0;
+    --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+    --bs-btn-active-bg: #5a23c8;
+    --bs-btn-active-border-color: #5a23c8;
+  }
+  
+  html[data-bs-theme="light"] .btn-bd-primary {
+    --bd-violet-bg: #193140;
+    --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+  
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bd-violet-bg);
+    --bs-btn-border-color: var(--bd-violet-bg);
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #3a4f5c;
+    --bs-btn-hover-border-color: #3a4f5c;
+    --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+    --bs-btn-active-bg: #243F4C;
+    --bs-btn-active-border-color: #243F4C;
+  }
+
+.bd-mode-toggle {
+    z-index: 1500;
+}
+
+.formContainer, .form-control, .eyeOpen1, .eyeClose1, .floatingInput {
+    background: transparent!important;
+    backdrop-filter: blur(20px) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2) !important;
+    border: 2px solid rgba(255, 255, 255, .2) !important;
+    color: #FFF !important;
+}
+
+.form-floating>.form-control:focus~label::after,
+.form-floating>.form-control:not(:placeholder-shown)~label::after {
+    background-color: transparent;
+    content: none;
+}
+
+/* Ocultar el icono cuando el input tiene foco */
+.form-floating input:focus + label svg {
+    display: none;
+}
+
+.colored-toast .swal2-title,
+.colored-toast .swal2-html-container {
+    color: white;
+}
+.no-select-popup .swal2-title,
+.colored-toast .swal2-html-container {
+    user-select: none;
+    cursor: default;
+}
+.no-select {
+    user-select: none;
+}
+.colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
+}
+.colored-toast.swal2-icon-error {
+    background-color: #f27474 !important;
+}

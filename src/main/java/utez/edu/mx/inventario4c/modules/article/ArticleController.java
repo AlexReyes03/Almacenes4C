@@ -1,8 +1,10 @@
 package utez.edu.mx.inventario4c.modules.article;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import utez.edu.mx.inventario4c.modules.article.DTO.ArticleQuantityDTO;
 import utez.edu.mx.inventario4c.modules.storage.Storage;
@@ -12,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/articles")
 @CrossOrigin(origins = {"http://localhost:5500", "http://127.0.0.1:5500"})
+@Validated
 public class ArticleController {
 
     @Autowired
@@ -19,7 +22,7 @@ public class ArticleController {
 
     // Obtener todos los artículos
     @GetMapping("")
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE"})
     public ResponseEntity<?> findAll() {
         return articleService.findAll();
     }
@@ -34,21 +37,21 @@ public class ArticleController {
     // Guardar un nuevo artículo
     @PostMapping("")
     @Secured("ROLE_ADMIN")
-    public ResponseEntity<?> save(@RequestBody Article article) {
+    public ResponseEntity<?> save(@Valid  @RequestBody Article article) {
         return articleService.save(article);
     }
 
     // Guardar una lista de artículos
     @PostMapping("/batch")
     @Secured("ROLE_ADMIN")
-    public ResponseEntity<?> saveAll(@RequestBody List<Article> articles) {
+    public ResponseEntity<?> saveAll(@Valid @RequestBody List<Article> articles) {
         return articleService.saveAll(articles);
     }
 
     // Actualizar un artículo existente
     @PutMapping("")
     @Secured("ROLE_ADMIN")
-    public ResponseEntity<?> update(@RequestBody Article article) {
+    public ResponseEntity<?> update(@Valid @RequestBody Article article) {
         return articleService.update(article);
     }
 

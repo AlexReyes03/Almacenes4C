@@ -2,6 +2,10 @@ package utez.edu.mx.inventario4c.modules.article;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import utez.edu.mx.inventario4c.modules.category.Category;
 import utez.edu.mx.inventario4c.modules.storage.Storage;
 
@@ -17,18 +21,26 @@ public class Article {
     @Column(name = "id", nullable = false)
     private long id;
 
+    @NotBlank(message = "El nombre es obligatorio")
+    @Pattern(
+            regexp = "^([A-ZÁÉÍÓÚÑ]{1}[a-záéíóúñ]+\\s*)*$",
+            message = "El nombre debe comenzar con mayúscula y solo puede contener letras"
+    )
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotBlank(message = "La descripción es obligatoria")
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
+    @Min(value = 1, message = "La cantidad debe ser mayor a 1")
     @Column(name = "on_stock", nullable = false, columnDefinition = "BIGINT DEFAULT 0")
     private long onStock;
 
     @Column(name = "registered_on", nullable = false)
     private String registeredOn;
 
+    @NotNull(message = "La categoría no puede estar vacía")
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;

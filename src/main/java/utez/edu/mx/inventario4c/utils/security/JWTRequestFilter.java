@@ -28,6 +28,15 @@ public class JWTRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+
+        String uri = request.getRequestURI();
+
+        // Si la ruta es un recurso estático, no aplicar filtro JWT
+        if (uri.endsWith(".html") || uri.startsWith("/css/") || uri.startsWith("/js/") || uri.startsWith("/images/")) {
+            filterChain.doFilter(request, response);
+            return; // Excluir archivos estáticos de la validación JWT
+        }
+
         final String AUTHORIZATION_HEADER = request.getHeader("Authorization");
 
         String username = null;
@@ -39,16 +48,13 @@ public class JWTRequestFilter extends OncePerRequestFilter {
                 username = jwtUtil.extractUsername(jwt);
             }
 
-            // Si el token es válido y no está autenticado, autentica al usuario
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
-                // Si el token es válido, se establece la autenticación
                 if (jwtUtil.validateToken(jwt, userDetails)) {
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                             new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource()
-                            .buildDetails(request));
+                    usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 } else {
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

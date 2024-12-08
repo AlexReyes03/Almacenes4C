@@ -2,6 +2,8 @@ package utez.edu.mx.inventario4c.modules.category;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import utez.edu.mx.inventario4c.modules.article.Article;
 import utez.edu.mx.inventario4c.modules.storage.Storage;
 
@@ -16,6 +18,11 @@ public class Category {
     @Column(name="id", nullable = false)
     private int id;
 
+    @NotBlank(message = "El nombre es obligatorio")
+    @Pattern(
+            regexp = "^([A-ZÁÉÍÓÚÑ]{1}[a-záéíóúñ]+\\s*)*$",
+            message = "El nombre debe comenzar con mayúscula y solo puede contener letras"
+    )
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 

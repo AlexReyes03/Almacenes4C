@@ -1,0 +1,205 @@
+/* PALETA DE COLORES 
+*  DARK        LIGHT
+*      + OSCURO
+* #081526     #090D26
+* #193140     #101740
+* #547C8C     #2F2B8C
+* #223E4D     #614ED9
+* #99C8F2     #765BD9
+* #96C6D9     #8A63E9
+*      + CLARO
+*/
+.paletadecolores {
+color: #081526;
+color: #223E4D;
+color: #193140;
+color: #547C8C;
+color: #99C8F2;
+color: #96C6D9;
+
+color: #090D26;
+color: #101740;
+color: #2F2B8C;
+color: #614ED9;
+color: #765BD9;
+color: #8A63E9;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body{
+  font-family: 'Poppins', sans-serif;
+}
+
+.table-container {
+  max-height: 23rem;
+}
+
+/* Estilos para el modo claro */
+html[data-bs-theme="light"] .dark-blue-bg {
+  background-color: #193140 !important;
+  border: 1px solid #193140 !important;
+  color: white !important;
+}
+
+/* Estilos para el modo claro */
+html[data-bs-theme="light"] .light-blue-bg {
+  background-color: #547C8C !important;
+  border: 1px solid #547C8C !important;
+  color: white !important;
+}
+
+html[data-bs-theme="light"] .light-gray-bg {
+  background-color: #f7f7f7 !important;
+  border: 1px solid #f7f7f7 !important;
+}
+
+/*CUSTOM BOOTSTRAP BUTTONS*/
+.btn:hover {
+  color: white !important;
+}
+
+.badge {
+  color: white !important;
+}
+
+
+/* CUSTOM TOGGLE BUTTON */
+.bi {
+  fill: currentColor;
+}
+
+html[data-bs-theme="dark"] .btn-bd-primary {
+  --bd-violet-bg: #712cf9;
+  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: var(--bd-violet-bg);
+  --bs-btn-border-color: var(--bd-violet-bg);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: #6528e0;
+  --bs-btn-hover-border-color: #6528e0;
+  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #5a23c8;
+  --bs-btn-active-border-color: #5a23c8;
+}
+
+html[data-bs-theme="light"] .btn-bd-primary {
+  --bd-violet-bg: #193140;
+  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: var(--bd-violet-bg);
+  --bs-btn-border-color: var(--bd-violet-bg);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: #3a4f5c;
+  --bs-btn-hover-border-color: #3a4f5c;
+  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #243F4C;
+  --bs-btn-active-border-color: #243F4C;
+}
+
+.bd-mode-toggle {
+  z-index: 1500;
+}
+
+/* CUSTOM SWAL2 */
+.colored-toast .swal2-title,
+.colored-toast .swal2-html-container {
+    color: white;
+}
+.no-select-popup .swal2-title,
+.colored-toast .swal2-html-container {
+    user-select: none;
+    cursor: default;
+}
+.no-select {
+    user-select: none;
+}
+.colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
+}
+.colored-toast.swal2-icon-error {
+    background-color: #f27474 !important;
+}
+
+  /* Tema claro */
+.swal-light {
+  --swal-bg-color: #ffffff;
+  --swal-title-color: #212529;
+  --swal-text-color: #495057;
+  --swal-border-color: #dee2e6;
+}
+
+/* Tema oscuro */
+.swal-dark {
+  --swal-bg-color: #212529;
+  --swal-title-color: #f8f9fa;
+  --swal-text-color: #ced4da;
+  --swal-border-color: #495057;
+}
+
+.swal2-modal {
+  background-color: var(--swal-bg-color) !important;
+  color: var(--swal-text-color) !important;
+  border: 1px solid var(--swal-border-color) !important;
+}
+
+.swal2-toast {
+  background-color: var(--swal-bg-color) !important;
+  color: var(--swal-text-color) !important;
+  border: 1px solid var(--swal-border-color) !important;
+}
+
+.swal2-footer {
+  border-top: 1px solid var(--swal-border-color) !important;
+}
+
+.swal2-title .swal2-modal{
+  color: var(--swal-title-color) !important;
+}
+
+.swal2-title .swal2-toast{
+  color: white !important;
+}
+
+.swal2-cancel {
+  color: var(--swal-title-color) !important;
+}
+
+.swal2-confirm {
+  color: white;
+}
+
+.table {
+  max-height: 40rem !important;
+}
+
+
+/* Categorías */
+
+.Neutro {
+  background-color: #6C757D;
+}
+.Azul {
+  background-color: #1E9FD9;
+}
+.Verde {
+  background-color: #57B948;
+}
+.Rojo {
+  background-color: #ED2228;
+}
+.Amarillo {
+  background-color: #F9D705;
+}
+.Naranja {
+  background-color: #F89A20;
+}
+.Morado {
+  background-color: #774C9E;
+}

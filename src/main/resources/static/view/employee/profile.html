@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/src/css/imports/bootstrap.min.css" />
+    <link rel="stylesheet" href="/src/css/imports/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="/src/css/imports/preloader.anim.css" />
+
+    <link rel="stylesheet" href="/src/css/stylesheet.css">
+    <link rel="stylesheet" href="/src/css/sidebar.css">
+
+    <script src="/src/js/imports/bootstrap.min.bundle.js"></script>
+    <script src="/src/js/imports/sweetalert2.all.min.js"></script>
+
+    <script src="/src/js/controller/modes-controller.js"></script>
+
+    <title>Perfil de Usuario</title>
+</head>
+<body>
+    <div class="contenedor position-relative">
+        <!-- SIDEBAR -->
+      <div id="sidebar-content">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+          <div class="offcanvas-body d-flex flex-column p-0 sidebar-bg">
+            
+            <h2 class="text-center user-select-none pt-3">SGA</h2>
+            <hr>
+            <!-- Navegación del Sidebar -->
+            <ul class="list-unstyled">
+              <!-- Botón de Perfil -->
+              <li id="profile">
+                <a href="/view/employee/profile.html" class="btn btnSidebar py-3 w-100 text-start d-flex align-items-center rounded-0">
+                  <i class="lni lni-agenda"></i>
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle me-1" viewBox="0 0 16 16">
+                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                    <span id="profile-text">Perfil</span>
+                  </span>
+                </a>
+              </li>
+              <!-- Artículos -->
+              <li id="article">
+                <a href="/view/article.html" class="btn btnSidebar py-3 w-100 text-start d-flex align-items-center rounded-0">
+                  <i class="lni lni-agenda"></i>
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-boxes me-1" viewBox="0 0 16 16">
+                      <path d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434zM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567zM7.5 9.933l-2.75 1.571v3.134l2.75-1.571zm1 3.134 2.75 1.571v-3.134L8.5 9.933zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567zm2.242-2.433V3.504L8.5 5.076V8.21zM7.5 8.21V5.076L4.75 3.504v3.134zM5.258 2.643 8 4.21l2.742-1.567L8 1.076zM15 9.933l-2.75 1.571v3.134L15 13.067zM3.75 14.638v-3.134L1 9.933v3.134z"/>
+                    </svg>
+                    Artículos
+                  </span>
+                </a>
+              </li>
+              <!-- Roles con dropdown -->
+              <li id="user">
+                <a href="/view/user.html" class="btn btnSidebar py-3 w-100 text-start d-flex align-items-center rounded-0">
+                  <i class="lni lni-agenda"></i>
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people me-1" viewBox="0 0 16 16">
+                      <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
+                    </svg>
+                    Usuarios
+                  </span>
+                </a>
+              </li>
+              <!-- Almacenes con subniveles -->
+              <li id="storage">
+                <a href="/view/storage.html" class="btn btnSidebar py-3 w-100 text-start d-flex align-items-center rounded-0">
+                  <i class="lni lni-agenda"></i>
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam me-1" viewBox="0 0 16 16">
+                      <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2zm3.564 1.426L5.596 5 8 5.961 14.154 3.5zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z"/>
+                    </svg>
+                    Almacenes
+                  </span>
+                </a>
+              </li>
+              <!-- Almacenes del usuario -->
+              <li  id="userStorage">
+                <a href="/view/employee/e.storage.html" class="btn btnSidebar py-3 w-100 text-start d-flex align-items-center rounded-0">
+                  <i class="lni lni-agenda"></i>
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+                      <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                      <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
+                    </svg>
+                    Mi almacén
+                  </span>
+                </a>
+              </li>
+              <!-- Configuración -->
+              <li id="category">
+                <a href="/view/category.html" class="btn btnSidebar py-3 w-100 text-start d-flex align-items-center rounded-0">
+                  <i class="lni lni-agenda"></i>
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags me-1" viewBox="0 0 16 16">
+                      <path d="M3 2v4.586l7 7L14.586 9l-7-7zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586z"/>
+                      <path d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1z"/>
+                    </svg>
+                    Categorías
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <!-- Footer -->
+            <div class="mt-auto">
+              <a class="btn btnSidebar py-3 w-100 text-start d-flex align-items-center rounded-0" onclick="logOut()">
+                <i class="lni lni-exit"></i>
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right me-1" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                  </svg>
+                  Cerrar sesión
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- ICONOS DEL BOTÓN PARA CAMBIAR DE TEMAS -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <symbol id="check2" viewBox="0 0 16 16">
+          <path
+            d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
+          />
+        </symbol>
+        <symbol id="circle-half" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+        </symbol>
+        <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+          <path
+            d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"
+          />
+          <path
+            d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"
+          />
+        </symbol>
+        <symbol id="sun-fill" viewBox="0 0 16 16">
+          <path
+            d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+          />
+        </symbol>
+      </svg>
+
+      <!-- BOTÓN PARA CAMBIAR DE TEMAS -->
+      <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+      <button
+        class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+        id="bd-theme"
+        type="button"
+        aria-expanded="false"
+        data-bs-toggle="dropdown"
+        aria-label="Toggle theme (auto)"
+      >
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
+          <use href="#circle-half"></use>
+        </svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+      </button>
+      <ul
+        class="dropdown-menu dropdown-menu-end shadow"
+        aria-labelledby="bd-theme-text"
+      >
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center"
+            data-bs-theme-value="light"
+            aria-pressed="false"
+          >
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+              <use href="#sun-fill"></use>
+            </svg>
+            Claro
+            <svg class="bi ms-auto d-none" width="1em" height="1em">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center"
+            data-bs-theme-value="dark"
+            aria-pressed="false"
+          >
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+              <use href="#moon-stars-fill"></use>
+            </svg>
+            Oscuro
+            <svg class="bi ms-auto d-none" width="1em" height="1em">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center active"
+            data-bs-theme-value="auto"
+            aria-pressed="true"
+          >
+            <svg class="bi me-2 opacity-50 theme-icon" width="1em" height="1em">
+              <use href="#circle-half"></use>
+            </svg>
+            Auto
+            <svg class="bi ms-auto d-none" width="1em" height="1em">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- MODAL EDITAR -->
+    <div class="modal fade" id="updateUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateUser" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Cuerpo del modal -->
+          <div class="modal-body">
+            <h4>Modificar usuario</h4>
+            <hr>
+            <form id="updateForm">
+              <!-- Campos del formulario para registrar usuario -->
+              <div class="row">
+                <div class="col-12 col-sm-6">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="u_name" name="u_name" pattern="^([A-ZÁÉÍÓÚÑ]{1}[a-záéíóúñ]+\s*)*$" title="El formato debe ser A- seguido de tres números, como A-001" autocomplete="off" required>
+                    <label for="u_name">Nombre(s)</label>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="u_surname" name="u_surname" pattern="^([A-ZÁÉÍÓÚÑ]{1}[a-záéíóúñ]+\s*)*$" title="El formato debe ser A- seguido de tres números, como A-001" autocomplete="off" required>
+                    <label for="u_surname">Apellido paterno</label>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-12 col-sm-6">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="u_lastname" name="u_lastname" pattern="^([A-ZÁÉÍÓÚÑ]{1}[a-záéíóúñ]+\s*)*$" title="El formato debe ser A- seguido de tres números, como A-001" autocomplete="off">
+                    <label for="u_lastname">Apellido materno</label>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="u_email" name="u_email" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="El formato debe ser A- seguido de tres números, como A-001" autocomplete="off" required>
+                    <label for="u_email">Correo electrónico</label>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="col-12 text-end">
+                    <button type="button" class="btn btn-success" onclick="updateUser()">Actualizar</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL CAMBIAR CONTRASEÑA -->
+    <div class="modal fade" id="updatePassword" tabindex="-1" aria-labelledby="updatePasswordModal"aria-hidden="true" data-bs-backdrop="static">
+     <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-body">
+                 <h1 class="modal-title fs-5" id="updatePasswordLabel">Cambiar contraseña</h1>
+                <hr>
+                 <form id="updatePasswordForm">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="input-group align-middle mb-4">
+                        <div class="form-floating">
+                          <input type="password" class="form-control" id="currentPassword" name="currentPassword" autocomplete="off" required>
+                          <label for="currentPassword">Contraseña actual</label>
+                        </div>
+                        <button class="btn btn-outline-secondary eyeOpen rounded-0 rounded-end" type="button" onclick="showPassword()" style="display: none;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                              <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                              <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                          </svg>
+                        </button>
+                        <button class="btn btn-outline-secondary eyeClose rounded-0 rounded-end" type="button" onclick="showPassword()">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                              <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
+                              <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-sm-6">
+                      <div class="input-group align-middle mb-3">
+                        <div class="form-floating">
+                          <input type="password" class="form-control" id="newPassword" name="newPassword" autocomplete="off" required>
+                          <label for="newPassword">Nueva contraseña</label>
+                        </div>
+                        <button class="btn btn-outline-secondary eyeOpen1 rounded-0 rounded-end" type="button" onclick="showPassword1()" style="display: none;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                              <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                              <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                          </svg>
+                        </button>
+                        <button class="btn btn-outline-secondary eyeClose1 rounded-0 rounded-end" type="button" onclick="showPassword1()">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                              <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
+                              <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <div class="input-group align-middle mb-3">
+                        <div class="form-floating">
+                          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" autocomplete="off" required>
+                          <label for="confirmPassword">Confirmar contraseña</label>
+                        </div>
+                        <button class="btn btn-outline-secondary eyeOpen2 rounded-0 rounded-end" type="button" onclick="showDoublePassword()" style="display: none;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                              <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                              <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                          </svg>
+                        </button>
+                        <button class="btn btn-outline-secondary eyeClose2 rounded-0 rounded-end" type="button" onclick="showDoublePassword()">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                              <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
+                              <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="col-12 text-end">
+                        <button type="button" class="btn btn-success" onclick="confirmUpdatePassword()">Actualizar</button>
+                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  </div>
+                 </form>
+             </div>
+         </div>
+     </div>
+ </div>
+  
+      <!-- NAVBAR -->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary position-fixed w-100 dark-blue-bg" style="z-index: 1040;">
+        <div class="container-fluid">
+          <a class="navbar-brand dark-blue-bg user-select-none">
+            <button class="btn me-3 dark-blue-bg" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+              </svg>
+            </button>
+            Perfil de Usuario
+          </a>
+          <div class="d-flex ms-auto me-3 fs-5">
+            <a class="d-none d-md-block d-sm-none navbar-brand dark-blue-bg" href="/src/view/profile.html">
+              Sistema Gestor de Almacenes
+            </a>
+            <a class="d-sm-block d-md-none navbar-brand">
+              SGA
+            </a>
+          </div>
+          <img
+            src="/src/css/img/logo_light.svg"
+            alt="Logo"
+            width="50"
+            height="50"
+            class="d-inline-block align-text-top"/>
+        </div>
+      </nav>
+  
+      <!-- INTERFAZ DE USUARIOS -->
+      <div class="d-flex align-items-center justify-content-center min-vh-100 pt-lg-0 pb-lg-0" style="padding-top: 5rem; padding-bottom: 1rem;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                  <div class="card shadow-sm mb-4">
+                    <div class="card-body light-gray-bg text-center">
+                      <img src="/src/css/img/userProfile.svg" alt="avatar"
+                        class="rounded-circle img-fluid" style="width: 150px;">
+                      <h5 class="my-3" id="username">IsaRV</h5>
+                      <p class="text-muted mb-3" id="role">Administrador</p>
+                      <div class="d-flex justify-content-center mb-2">
+                        <button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateUser" onclick="loadData()">
+                          Editar Perfil
+                        </button>
+                        <button  type="button" class="btn btn-outline-primary ms-1" data-bs-toggle="modal" data-bs-target="#updatePassword">
+                          Cambiar contraseña
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="col-lg-8">
+                  <div class="card shadow-sm mb-4">
+                    <div class="card-header light-blue-bg">
+                        <div class="row">
+                            <div class="col-sm">
+                              <p class="mb-0 fs-4">Gestionar perfil de usuario</p>
+                            </div>
+                          </div>
+                        </div>      
+                    <div class="card-body light-gray-bg">
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <p class="mb-0">Nombre completo</p>
+                        </div>
+                        <div class="col-sm-9">
+                          <p class="text-muted mb-0" id="fullName">---</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <p class="mb-0">Correo</p>
+                        </div>
+                        <div class="col-sm-9">
+                          <p class="text-muted mb-0" id="email">---</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <p class="mb-0">Contraseña</p>
+                        </div>
+                        <div class="col-sm-9">
+                          <p class="text-muted mb-0">*********</p>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <p class="mb-0">Estado</p>
+                        </div>
+                        <div class="col-sm-9">
+                          <p class="text-muted mb-0">Activo</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card shadow-sm mb-4 mb-md-0">
+                        <div class="card-header light-blue-bg">
+                            <p class="mb-0 fs-5">Asignaciones</p>
+                        </div>
+                        <div class="card-body light-gray-bg">
+                          <div class="row">
+                            <div class="col-sm-4 col-12">
+                              <p class="mb-0">Almacén gestionado</p>
+                            </div>
+                            <div class="col-sm">
+                              <p class="text-muted mb-0" id="storageName"></p>
+                            </div>
+                            <div class="col-sm d-flex justify-content-start mt-3 mt-sm-0 justify-content-sm-end" id="divVisitor">
+                              <button class="btn btn-primary rounded-5" id="visitStorage" onclick="visitStorage()" hidden>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                                  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      </div>
+    </div>
+    <script src="/src/js/controller/employee/profile.controller.js"></script>
+    <script src="/src/js/controller/sidebar.controller.js"></script>
+</body>
+</html>
